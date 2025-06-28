@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Multiple Loaders</title>
+    <style>
+        body {
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Loader 1 - Simple rotating border */
+        .loader1 {
+            height: 100px;
+            width: 100px;
+            border-radius: 50%;
+            border: 15px solid rgb(17, 198, 234);
+            border-top: 15px solid black;
+            animation: spin 1s linear infinite;
+        }
+
+        /* Loader 2 - rotating border with center circle */
+        .loader2 {
+            position: relative;
+            height: 100px;
+            width: 100px;
+            border-radius: 50%;
+            border: 15px solid transparent;
+            border-top: 15px solid black;
+            animation: spin 1s linear infinite;
+        }
+        .loader2::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            height: 100px;
+            width: 100px;
+            border-radius: 50%;
+            background-color: red;
+        }
+
+        /* Loader 3 - bouncing dots */
+        .parent {
+            display: flex;
+            align-items: flex-end;
+            gap: 8px;
+        }
+        .parent div {
+            height: 5px;
+            width: 5px;
+            padding: 10px;
+            border-radius: 50%;
+            animation-name: bounce;
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in-out;
+        }
+        .a { background-color: rgb(255, 0, 0); animation-duration: 1s; }
+        .b { background-color: rgb(0, 255, 26); animation-duration: 1.5s; }
+        .c { background-color: rgb(34, 0, 255); animation-duration: 2s; }
+        .d { background-color: rgb(255, 255, 255); animation-duration: 2.5s; }
+        .e { background-color: rgb(255, 230, 0); animation-duration: 3s; }
+
+        /* Animations */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(15px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="loader1"></div>
+    <div class="loader2"></div>
+    <div class="parent">
+        <div class="a"></div>
+        <div class="b"></div>
+        <div class="c"></div>
+        <div class="d"></div>
+        <div class="e"></div>
+    </div>
+</body>
+</html>
